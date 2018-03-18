@@ -15,7 +15,7 @@ import App from './../imports/UI/App'
 
 Meteor.startup(()=>{
   Tracker.autorun(()=>{
-   const players =  Players.find().fetch()
+   const players =  Players.find({}, {sort:{score:-1}}).fetch()
   ReactDOM.render(<App players={players} />, document.getElementById('root'))
 })
 
