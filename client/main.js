@@ -9,17 +9,25 @@ import { Players } from './../imports/api/players'
 
 const renderPlayesrs = (playersList) => {
   return playersList.map((player) => {
-    return <p key={player._id} >{player.name} has {player.score} point(s)  </p>
+    return (
+    <p key={player._id} >
+      {player.name} has {player.score} point(s).
+      <button onClick={()=> Players.update({_id: player._id}, { $inc:{score:+1} })}>+</button>
+      <button onClick={()=> Players.update({_id: player._id}, { $inc:{score:-1} })}>-</button>
+      <button onClick={()=> Players.remove({_id: player._id})}>X</button>
+    </p>
+    )
   })
 }
 const handeSubmit = (e) => {
-  const playerName = e.target.playerName
+  const playerName = e.target.playerName.value
   e.preventDefault()
  
     Players.insert({
       name: playerName,
       score: 0
     })
+    console.log(playerName)
   
 }
 
