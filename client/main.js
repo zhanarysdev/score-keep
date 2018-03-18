@@ -8,16 +8,10 @@ import { Players } from './../imports/api/players'
 import TitleBar from './../imports/UI/TitleBar'
 import AddPlayer from './../imports/UI/AddPlayer'
 import Player from './../imports/UI/Player'
+import PlayerList from './../imports/UI/PlayerList'
 
 
 
-const renderPlayesrs = (playersList) => {
-  return playersList.map((player) => {
-    return (
-      <Player key={player._id} player={player} />
-    )
-  })
-}
 const handleSubmit = (e) => {
   const playerName = e.target.playerName.value
   e.preventDefault()
@@ -45,7 +39,7 @@ Meteor.startup(()=>{
       <TitleBar title="Score Keep App"/>
       <p>Hello {name}</p>
       <p>This is my second p</p>
-      {renderPlayesrs(players)}
+      <PlayerList players={players}/>
      <AddPlayer handleSubmit={handleSubmit}/>
     </div>
   )
