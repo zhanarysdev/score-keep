@@ -1,9 +1,12 @@
-import React from 'react';
+import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { Meteor } from 'meteor/meteor';
 import {Tracker} from 'meteor/tracker' 
 import { Players } from './../imports/api/players'
 
+
+import TitleBar from './../imports/UI/TitleBar'
+import AddPlayer from './../imports/UI/AddPlayer'
 
 
 
@@ -19,7 +22,7 @@ const renderPlayesrs = (playersList) => {
     )
   })
 }
-const handeSubmit = (e) => {
+const handleSubmit = (e) => {
   const playerName = e.target.playerName.value
   e.preventDefault()
  
@@ -31,6 +34,9 @@ const handeSubmit = (e) => {
   
 }
 
+
+
+
 Meteor.startup(()=>{
   Tracker.autorun(()=>{
    const players =  Players.find().fetch()
@@ -40,14 +46,11 @@ Meteor.startup(()=>{
   let name = 'mike'
   let jsx = (
     <div>
-      <h1>{title}</h1>
+      <TitleBar/>
       <p>Hello {name}</p>
       <p>This is my second p</p>
       {renderPlayesrs(players)}
-      <form onSubmit={handeSubmit}>
-        <input type="text" name="playerName" placeholder="Player name" />
-        <button>Add player</button>
-      </form>
+     <AddPlayer handleSubmit={handleSubmit}/>
     </div>
   )
   ReactDOM.render(jsx, document.getElementById('root'))
